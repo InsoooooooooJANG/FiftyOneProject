@@ -1,21 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Loading from "./isLoading"
+import { render } from 'react-dom';
+import Login from "./Login/Login"
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class extends React.Component {
+  state={
+    isLoading:true
+  };
+  componentDidMount(){
+    setTimeout(function(){this.setState({isLoading:false})}.bind(this), 2000);
+  }
+  render(){
+    const {isLoading} = this.state;
+    return isLoading? <Loading></Loading> : <Login></Login>;
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
